@@ -8,15 +8,13 @@ def add_symbol_route():
     try:
         data = request.get_json()
         symbol = data.get("symbol")
-
         if not symbol:
-            return jsonify({"error": "Symbol not provided"}), 400
+            return jsonify({"error": "Missing 'symbol'"}), 400
 
         add_main(symbol)
-        return jsonify({"message": f"{symbol.upper()} added to raw_metrics"}), 200
-
+        return jsonify({"message": f"{symbol} added successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000)  # указать порт вручную (опционально)
